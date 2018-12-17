@@ -9,6 +9,6 @@ public interface PedidoService {
     Pedido salvar(Pedido pedido);
     List<Pedido> recuperar();
     Optional<Pedido> recuperarPorId(Long id);
-    Pedido atualizar(Pedido pedido);
+    Pedido atualizar(Long id,Pedido pedido);
     void apagar(Long id);
 }

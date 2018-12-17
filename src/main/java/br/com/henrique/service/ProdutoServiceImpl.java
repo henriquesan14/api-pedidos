@@ -34,7 +34,8 @@ public class ProdutoServiceImpl implements ProdutoService {
     }
 
     @Override
-    public Produto atualizar(Produto produto) {
+    public Produto atualizar(Long id,Produto produto) {
+        produto.setId(id);
         return produtoDao.save(produto);
     }
 

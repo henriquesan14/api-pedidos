@@ -9,6 +9,6 @@ public interface MesaService {
     Mesa salvar(Mesa mesa);
     List<Mesa> recuperar();
     Optional<Mesa> recuperarPorId(Long id);
-    Mesa atualizar(Mesa mesa);
+    Mesa atualizar(Long id,Mesa mesa);
     void apagar(Long id);
 }

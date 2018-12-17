@@ -34,7 +34,8 @@ public class MesaServiceImpl implements MesaService {
     }
 
     @Override
-    public Mesa atualizar(Mesa mesa) {
+    public Mesa atualizar(Long id,Mesa mesa) {
+        mesa.setId(id);
         return mesaDao.save(mesa);
     }
 

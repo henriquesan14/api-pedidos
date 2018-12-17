@@ -1,6 +1,6 @@
 package br.com.henrique.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
@@ -20,7 +20,7 @@ public class Mesa {
     private String descricao;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnoreProperties({"mesa", "itensPedidos"})
+    @JsonIgnore
     @OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL)
     private List<Pedido> pedidos;
 

@@ -23,7 +23,7 @@ public class Pedido {
     private BigDecimal valorTotal;
 
     @JsonIgnoreProperties("pedido")
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedidos;
 
     @JsonIgnoreProperties({"pedidos", "nome", "descricao"})

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -21,9 +22,24 @@ public class MesaResource {
         return mesaService.recuperar();
     }
 
+    @GetMapping("{id}")
+    public Optional<Mesa> listarPorId(@PathVariable Long id){
+        return mesaService.recuperarPorId(id);
+    }
+
     @PostMapping
     public Mesa salvar(@Valid @RequestBody  Mesa mesa){
         return mesaService.salvar(mesa);
+    }
+
+    @PutMapping("{id}")
+    public Mesa editar(@Valid @RequestBody Mesa mesa, @PathVariable("id") Long id){
+        return mesaService.atualizar(id,mesa);
+    }
+
+    @DeleteMapping("{id}")
+    public void apagar(@PathVariable("id") Long id){
+        mesaService.apagar(id);
     }
 
 

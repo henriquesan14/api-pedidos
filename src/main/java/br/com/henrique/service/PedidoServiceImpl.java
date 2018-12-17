@@ -1,7 +1,6 @@
 package br.com.henrique.service;
 
 import br.com.henrique.domain.Pedido;
-import br.com.henrique.repository.ItemDao;
 import br.com.henrique.repository.PedidoDao;
 import br.com.henrique.repository.ProdutoDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class PedidoServiceImpl implements PedidoService {
     @Autowired
     private ProdutoDao produtoDao;
 
-    @Autowired
-    private ItemDao itemDao;
 
     @Override
     public Pedido salvar(Pedido pedido) {
@@ -32,7 +29,7 @@ public class PedidoServiceImpl implements PedidoService {
         pedido.getItensPedidos().forEach(i -> {
             i.setPedido(pedido);
             i.setProduto(produtoDao.findById(i.getProduto().getId()).get());
-            itemDao.save(i);
+
         });
 
         BigDecimal totalItens = pedido.getItensPedidos().stream()
@@ -57,7 +54,20 @@ public class PedidoServiceImpl implements PedidoService {
     }
 
     @Override
-    public Pedido atualizar(Pedido pedido) {
+    public Pedido atualizar(Long id,Pedido pedido) {
+        pedido.setId(id);
+        pedido.setDataPedido(LocalDateTime.now());
+        pedido.getItensPedidos().forEach(i -> {
+            i.setPedido(pedido);
+            i.setProduto(produtoDao.findById(i.getProduto().getId()).get());
+        });
+
+        BigDecimal totalItens = pedido.getItensPedidos().stream()
+                .map(i -> i.getProduto().getValorUnitario().multiply(new BigDecimal(i.getQuantidade())))
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        pedido.setValorTotal(totalItens);
+
         return pedidoDao.save(pedido);
     }
 

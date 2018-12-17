@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -21,9 +22,23 @@ public class ProdutoResource {
         return produtoService.recuperar();
     }
 
+    @GetMapping("{id}")
+    public Optional<Produto> recuperarPorId(@PathVariable Long id){
+        return produtoService.recuperarPorId(id);
+    }
+
     @PostMapping
     public Produto salvar(@Valid @RequestBody  Produto produto){
         return produtoService.salvar(produto);
     }
 
+    @PutMapping("{id}")
+    public Produto atualizar(@PathVariable Long id, @Valid @RequestBody Produto produto){
+        return produtoService.atualizar(id,produto);
+    }
+
+    @DeleteMapping("{id}")
+    public void apagar(@PathVariable Long id){
+        produtoService.apagar(id);
+    }
 }

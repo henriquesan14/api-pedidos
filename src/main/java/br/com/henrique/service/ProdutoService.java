@@ -9,6 +9,6 @@ public interface ProdutoService {
     Produto salvar(Produto produto);
     List<Produto> recuperar();
     Optional<Produto> recuperarPorId(Long id);
-    Produto atualizar(Produto produto);
+    Produto atualizar(Long id,Produto produto);
     void apagar(Long id);
 }
