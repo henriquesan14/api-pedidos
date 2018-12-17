@@ -1,14 +1,10 @@
 package br.com.henrique.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.util.List;
+
 
 @Entity
 public class Produto {
@@ -22,11 +18,6 @@ public class Produto {
 
     @NotNull
     private BigDecimal valorUnitario;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
-    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
-    private List<ItemPedido> itensPedidos;
 
     public Long getId() {
         return id;
@@ -52,11 +43,5 @@ public class Produto {
         this.valorUnitario = valorUnitario;
     }
 
-    public List<ItemPedido> getItensPedidos() {
-        return itensPedidos;
-    }
 
-    public void setItensPedidos(List<ItemPedido> itensPedidos) {
-        this.itensPedidos = itensPedidos;
-    }
 }

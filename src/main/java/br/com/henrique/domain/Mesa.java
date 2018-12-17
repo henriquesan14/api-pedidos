@@ -1,11 +1,8 @@
 package br.com.henrique.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
+
 
 @Entity
 public class Mesa {
@@ -19,10 +16,7 @@ public class Mesa {
 
     private String descricao;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
-    @OneToMany(mappedBy = "mesa", cascade = CascadeType.ALL)
-    private List<Pedido> pedidos;
+
 
     public Long getId() {
         return id;
@@ -48,11 +42,5 @@ public class Mesa {
         this.descricao = descricao;
     }
 
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
 
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
 }

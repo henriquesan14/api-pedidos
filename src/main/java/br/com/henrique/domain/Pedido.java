@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,11 +24,14 @@ public class Pedido {
 
     private BigDecimal valorTotal;
 
+    @Valid
+    @NotEmpty
     @JsonIgnoreProperties("pedido")
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedidos;
 
-    @JsonIgnoreProperties({"pedidos", "nome", "descricao"})
+
+    @JsonIgnoreProperties({"descricao","nome"})
     @ManyToOne
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;

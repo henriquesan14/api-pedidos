@@ -4,6 +4,7 @@ package br.com.henrique.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -13,9 +14,10 @@ public class ItemPedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private Integer quantidade;
 
-    @JsonIgnoreProperties({"itensPedidos"})
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
