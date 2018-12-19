@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,8 +32,9 @@ public class Pedido {
     private List<ItemPedido> itensPedidos;
 
 
+
     @JsonIgnoreProperties({"descricao","pedidos"})
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 

@@ -18,7 +18,7 @@ public class Mesa {
     private String nome;
 
     private String descricao;
-
+    
 
     public Long getId() {
         return id;
@@ -43,7 +43,5 @@ public class Mesa {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
-
 
 }
