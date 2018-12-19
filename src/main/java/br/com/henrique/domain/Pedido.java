@@ -31,8 +31,8 @@ public class Pedido {
     private List<ItemPedido> itensPedidos;
 
 
-    @JsonIgnoreProperties({"descricao","nome"})
-    @ManyToOne
+    @JsonIgnoreProperties({"descricao","pedidos"})
+    @ManyToOne()
     @JoinColumn(name = "id_mesa")
     private Mesa mesa;
 

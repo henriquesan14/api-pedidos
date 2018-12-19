@@ -41,6 +41,10 @@ public class MesaServiceImpl implements MesaService {
 
     @Override
     public void apagar(Long id) {
-        mesaDao.deleteById(id);
+        Mesa mesa = mesaDao.getOne(id);
+            mesaDao.deleteById(id);
+
     }
+
+
 }

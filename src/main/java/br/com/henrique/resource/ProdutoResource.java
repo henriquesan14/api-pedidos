@@ -41,4 +41,6 @@ public class ProdutoResource {
     public void apagar(@PathVariable Long id){
         produtoService.apagar(id);
     }
+
+
 }

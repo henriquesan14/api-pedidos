@@ -1,7 +1,10 @@
 package br.com.henrique.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 @Entity
@@ -15,7 +18,6 @@ public class Mesa {
     private String nome;
 
     private String descricao;
-
 
 
     public Long getId() {
@@ -41,6 +43,7 @@ public class Mesa {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
 
 
 }

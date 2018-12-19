@@ -41,4 +41,7 @@ public class PedidoResource {
     public void apagar(@PathVariable Long id){
         pedidoService.apagar(id);
     }
+
+
+
 }
