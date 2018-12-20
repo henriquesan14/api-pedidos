@@ -18,7 +18,10 @@ public class Mesa {
     private String nome;
 
     private String descricao;
-    
+
+    @JsonIgnoreProperties({"itensPedidos", "mesa","dataPedido","valorTotal"})
+    @OneToMany(mappedBy = "mesa")
+    private List<Pedido> pedidos;
 
     public Long getId() {
         return id;
@@ -44,4 +47,11 @@ public class Mesa {
         this.descricao = descricao;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(List<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
 }

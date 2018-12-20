@@ -20,9 +20,12 @@ public class Produto {
     private String nome;
 
 
-
-    @NotNull
+    @NotNull(message = "Valor Unitário não pode ser nulo")
     private BigDecimal valorUnitario;
+
+    @JsonIgnoreProperties({"produto","pedido","quantidade"})
+    @OneToMany(mappedBy = "produto")
+    private List<ItemPedido> itensPedidos;
 
     public Long getId() {
         return id;
@@ -48,5 +51,11 @@ public class Produto {
         this.valorUnitario = valorUnitario;
     }
 
+    public List<ItemPedido> getItensPedidos() {
+        return itensPedidos;
+    }
 
+    public void setItensPedidos(List<ItemPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
 }

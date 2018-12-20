@@ -25,18 +25,18 @@ public class Pedido {
 
     private BigDecimal valorTotal;
 
+    @JsonIgnoreProperties({"descricao","pedidos"})
+    @ManyToOne
+    @JoinColumn(name = "id_mesa")
+    @NotNull
+    private Mesa mesa;
+
     @Valid
     @NotEmpty
     @JsonIgnoreProperties("pedido")
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedidos;
 
-
-
-    @JsonIgnoreProperties({"descricao","pedidos"})
-    @ManyToOne
-    @JoinColumn(name = "id_mesa")
-    private Mesa mesa;
 
     public Long getId() {
         return id;
