@@ -3,10 +3,11 @@ package br.com.henrique.resource;
 import br.com.henrique.domain.Pedido;
 import br.com.henrique.service.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @CrossOrigin("*")
 @RestController
@@ -22,7 +23,7 @@ public class PedidoResource {
     }
 
     @GetMapping("{id}")
-    public Optional<Pedido> recuperarPorId(@PathVariable Long id){
+    public Pedido recuperarPorId(@PathVariable Long id){
         return pedidoService.recuperarPorId(id);
     }
 
@@ -38,8 +39,9 @@ public class PedidoResource {
     }
 
     @DeleteMapping("{id}")
-    public void apagar(@PathVariable Long id){
+    public ResponseEntity<Pedido> apagar(@PathVariable Long id){
         pedidoService.apagar(id);
+        return ResponseEntity.ok().build();
     }
 
 

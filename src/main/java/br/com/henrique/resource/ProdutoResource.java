@@ -3,6 +3,7 @@ package br.com.henrique.resource;
 import br.com.henrique.domain.Produto;
 import br.com.henrique.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,7 +24,7 @@ public class ProdutoResource {
     }
 
     @GetMapping("{id}")
-    public Optional<Produto> recuperarPorId(@PathVariable Long id){
+    public Produto recuperarPorId(@PathVariable Long id){
         return produtoService.recuperarPorId(id);
     }
 
@@ -38,8 +39,9 @@ public class ProdutoResource {
     }
 
     @DeleteMapping("{id}")
-    public void apagar(@PathVariable Long id){
+    public ResponseEntity<Produto> apagar(@PathVariable Long id){
         produtoService.apagar(id);
+        return ResponseEntity.ok().build();
     }
 
 

@@ -1,6 +1,7 @@
 package br.com.henrique.service;
 
 import br.com.henrique.domain.Produto;
+import br.com.henrique.exception.EntityNotFoundException;
 import br.com.henrique.repository.ProdutoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,18 +30,23 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Produto> recuperarPorId(Long id) {
-        return produtoDao.findById(id);
+    public Produto recuperarPorId(Long id) {
+        return produtoDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produto","id",id));
     }
 
     @Override
     public Produto atualizar(Long id,Produto produto) {
+        Produto produtoBuscado = produtoDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produto","id",id));
         produto.setId(id);
         return produtoDao.save(produto);
     }
 
     @Override
     public void apagar(Long id) {
+        Produto produto = produtoDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produto","id",id));
         produtoDao.deleteById(id);
     }
 
