@@ -33,7 +33,7 @@ public class Pedido {
 
     @Valid
     @NotEmpty
-    @JsonIgnoreProperties("pedido")
+    @JsonIgnoreProperties({"pedido"})
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itensPedidos;
 

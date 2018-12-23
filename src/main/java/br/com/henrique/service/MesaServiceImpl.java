@@ -4,7 +4,6 @@ import br.com.henrique.domain.Mesa;
 import br.com.henrique.exception.EntityNotFoundException;
 import br.com.henrique.repository.MesaDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

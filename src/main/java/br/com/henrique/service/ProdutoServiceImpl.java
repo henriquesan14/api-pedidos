@@ -40,6 +40,7 @@ public class ProdutoServiceImpl implements ProdutoService {
         Produto produtoBuscado = produtoDao.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Produto","id",id));
         produto.setId(id);
+        produto.setItensPedidos(null);
         return produtoDao.save(produto);
     }
 
