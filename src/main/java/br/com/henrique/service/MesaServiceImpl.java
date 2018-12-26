@@ -4,6 +4,9 @@ import br.com.henrique.domain.Mesa;
 import br.com.henrique.exception.EntityNotFoundException;
 import br.com.henrique.repository.MesaDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,8 +26,15 @@ public class MesaServiceImpl implements MesaService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Mesa> recuperar() {
+    public List<Mesa> recuperarAll() {
         return mesaDao.findAll();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<Mesa> recuperar(int page, int size, String nome) {
+        Pageable pageable = new PageRequest(page, size);
+        return mesaDao.findAllByNomeContainingIgnoreCaseOrderByNomeAsc(pageable,nome);
     }
 
     @Transactional(readOnly = true)
@@ -48,6 +58,5 @@ public class MesaServiceImpl implements MesaService {
                 .orElseThrow(() -> new EntityNotFoundException("Mesa","id",id));
         mesaDao.delete(mesa);
     }
-
 
 }

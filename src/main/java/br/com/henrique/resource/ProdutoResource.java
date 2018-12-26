@@ -3,6 +3,7 @@ package br.com.henrique.resource;
 import br.com.henrique.domain.Produto;
 import br.com.henrique.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +19,16 @@ public class ProdutoResource {
     @Autowired
     private ProdutoService produtoService;
 
+    @GetMapping("all")
+    public List<Produto> recuperarAll(){
+        return produtoService.recuperarAll();
+    }
+
     @GetMapping
-    public List<Produto> recuperar(){
-        return produtoService.recuperar();
+    public Page<Produto> recuperar(@RequestParam(value = "page", defaultValue = "0") int page,
+                                   @RequestParam(value = "size", defaultValue = "5") int size,
+                                   @RequestParam(value = "nome", defaultValue = "") String nome){
+        return produtoService.recuperar(page, size, nome);
     }
 
     @GetMapping("{id}")

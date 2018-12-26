@@ -3,6 +3,7 @@ package br.com.henrique.resource;
 import br.com.henrique.domain.Mesa;
 import br.com.henrique.service.MesaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +18,16 @@ public class MesaResource {
     @Autowired
     private MesaService mesaService;
 
+    @GetMapping("/all")
+    public List<Mesa> listarAll(){
+        return mesaService.recuperarAll();
+    }
+
     @GetMapping
-    public List<Mesa> listar(){
-        return mesaService.recuperar();
+    public Page<Mesa> listar(@RequestParam(value = "page", defaultValue = "0") int page,
+                                    @RequestParam(value = "size", defaultValue = "5") int size,
+                                    @RequestParam(value = "nome", defaultValue = "") String nome){
+        return mesaService.recuperar(page,size, nome);
     }
 
     @GetMapping("{id}")

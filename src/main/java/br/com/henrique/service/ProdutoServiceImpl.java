@@ -4,6 +4,9 @@ import br.com.henrique.domain.Produto;
 import br.com.henrique.exception.EntityNotFoundException;
 import br.com.henrique.repository.ProdutoDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +27,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Produto> recuperar() {
+    public List<Produto> recuperarAll() {
         return produtoDao.findAll();
+    }
+
+    @Override
+    public Page<Produto> recuperar(int page, int size, String nome) {
+        Pageable pageable = new PageRequest(page, size);
+        return produtoDao.findAllByNomeContainingIgnoreCaseOrderByNomeAsc(pageable, nome);
     }
 
     @Transactional(readOnly = true)

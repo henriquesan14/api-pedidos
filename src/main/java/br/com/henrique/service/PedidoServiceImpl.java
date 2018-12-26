@@ -5,6 +5,9 @@ import br.com.henrique.exception.EntityNotFoundException;
 import br.com.henrique.repository.PedidoDao;
 import br.com.henrique.repository.ProdutoDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,8 +46,14 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Pedido> recuperar() {
+    public List<Pedido> recuperarAll() {
         return pedidoDao.findAll();
+    }
+
+    @Override
+    public Page<Pedido> recuperar(int page, int size, String nome) {
+        Pageable pageable = new PageRequest(page, size);
+        return pedidoDao.findAllByMesaNomeContainingIgnoreCaseOrderByDataPedidoAsc(pageable, nome);
     }
 
     @Transactional(readOnly = true)
