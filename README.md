@@ -14,7 +14,7 @@
 
 ### Endpoints REST:
 
-**Listar paginado e ordenado:**
+**Buscar paginado e ordenado:**
 >GET:  /mesas , /produtos , /pedidos
 
 **parâmetro page, default = 0;
@@ -23,9 +23,11 @@ parâmetro nome, default = ""**
 
 **Exemplo = /mesas?size=0&size=5&nome=teste**
 
-**Listar todos:**
+**Buscar todos:**
 >GET:  /mesas/all , /produtos/all , /pedidos/all
 
+**Buscar por id:**
+>GET:  /mesas/id , /produtos/id , /pedidos/id
 
 
 **Cadastro:**
